@@ -14,14 +14,15 @@
     <form action="">
       <input id="ui" autocomplete="off" placeholder="user id" />
       <input id="host" autocomplete="off" placeholder="hostname" />
-      <button>Send</button>
+      <button id="btnSubscribe">Subscribe</button>
+      <button id="btnClear">Clear</button>
     </form>
     <ul id="messages"></ul>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
-        $('form').submit(function(){
+        $("#btnSubscribe").on("click", function(){
           var host = $("#host").val();
           var ui = $("#ui").val();
           var socket = io();
@@ -31,6 +32,10 @@
           });
 
           return false;
+        });
+
+        $("#btnClear").on("click", function(){
+          $("#messages").empty();
         });
       });
     </script>
