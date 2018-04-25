@@ -10,9 +10,12 @@ app.get('/', function(req, res){
 });
 
 app.post('/log', function(req, res){
+  var ui = req.get("ui");
+  var host = req.get("host");
+
   console.log(req.body);
 
-  io.emit('chat message', req.body);
+  io.emit(host + "," + ui, req.body);
 
   res.end();
 });
