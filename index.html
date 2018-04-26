@@ -32,6 +32,8 @@
 
           socket.on(host + "," + ui, function(msg){
             $('#messages').append($('<li>').text(msg));
+
+            window.scrollTo(0, document.body.scrollHeight);
           });
 
           $("span.subscribe").html("Subscribe &lt;" + host + "," + ui + "&gt;");
