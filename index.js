@@ -16,6 +16,7 @@ app.post('/log', function(req, res){
   console.log(req.body);
 
   io.emit(host + "," + ui, req.body);
+  io.emit(host + "," + "all", req.body);
 
   res.end();
 });
