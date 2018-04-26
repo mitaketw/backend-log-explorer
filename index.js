@@ -10,8 +10,8 @@ app.get('/', function(req, res){
 });
 
 app.post('/log', function(req, res){
-  var ui = req.get("ui");
-  var host = req.get("host");
+  var host = req.get("host").toLowerCase();
+  var ui = req.get("ui").toLowerCase();
 
   console.log(req.body);
 

@@ -24,8 +24,8 @@
     <script>
       $(function () {
         $("#btnSubscribe").on("click", function(){
-          var host = $("#host").val();
-          var ui = $("#ui").val() || "all";
+          var host = $("#host").val().toLowerCase();
+          var ui = ($("#ui").val() || "all").toLowerCase();
           var socket = io();
 
           socket.removeAllListeners();
