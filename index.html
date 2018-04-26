@@ -28,6 +28,8 @@
           var ui = $("#ui").val() || "all";
           var socket = io();
 
+          socket.removeAllListeners();
+
           socket.on(host + "," + ui, function(msg){
             $('#messages').append($('<li>').text(msg));
           });
