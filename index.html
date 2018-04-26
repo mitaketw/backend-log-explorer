@@ -12,11 +12,12 @@
   </head>
   <body>
     <form action="">
-      <input id="ui" autocomplete="off" placeholder="user id" />
       <input id="host" autocomplete="off" placeholder="hostname" />
+      <input id="ui" autocomplete="off" placeholder="user id" />
       <button id="btnSubscribe">Subscribe</button>
       <button id="btnClear">Clear</button>
     </form>
+    <span class="subscribe"></span>
     <ul id="messages"></ul>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
@@ -24,16 +25,14 @@
       $(function () {
         $("#btnSubscribe").on("click", function(){
           var host = $("#host").val();
-          var ui = $("#ui").val();
+          var ui = $("#ui").val() || "all";
           var socket = io();
-
-          if (ui === null) {
-            ui = "all";
-          }
 
           socket.on(host + "," + ui, function(msg){
             $('#messages').append($('<li>').text(msg));
           });
+
+          $("span.subscribe").html("Subscribe <" + host + "," + ui + ">");
 
           return false;
         });
