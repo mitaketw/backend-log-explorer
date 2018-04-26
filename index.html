@@ -1,23 +1,48 @@
 <!doctype html>
 <html>
   <head>
-    <title>Socket.IO chat</title>
+    <title>Qmi backend log explorer</title>
     <style>
-      * { margin: 0; padding: 0; box-sizing: border-box; }
-      body { font: 13px Helvetica, Arial; }
-      #messages { list-style-type: none; margin: 0; padding: 0; }
-      #messages li { font-family: monospace; padding: 5px 10px; }
-      #messages li:nth-child(odd) { background: #eee; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: monospace;
+        font-size: 13px;
+      }
+
+      #controller {
+        position: fixed;
+      }
+
+      #messages {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      #messages li {
+        padding: 5px 10px;
+      }
+
+      #messages li:nth-child(odd) {
+        background: #eee;
+      }
     </style>
   </head>
   <body>
-    <form action="">
-      <input id="host" autocomplete="off" placeholder="hostname" />
-      <input id="ui" autocomplete="off" placeholder="user id" />
-      <button id="btnSubscribe">Subscribe</button>
-      <button id="btnClear">Clear</button>
-    </form>
-    <span class="subscribe"></span>
+    <div id="controller">
+      <div>
+        <input id="host" autocomplete="off" placeholder="hostname" />
+        <input id="ui" autocomplete="off" placeholder="user id (default is all)" />
+        <button id="btnSubscribe">Subscribe</button>
+        <button id="btnClear">Clear</button>
+      </div>
+      <span class="subscribe"></span>
+    </div>
     <ul id="messages"></ul>
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
