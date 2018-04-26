@@ -64,7 +64,9 @@
           socket.removeAllListeners();
 
           socket.on(host + "," + ui, function(msg){
-            $('#messages').append($('<li>').text(msg));
+            var li = $('<li>').text(msg);
+
+            $('#messages').append(li);
 
             window.scrollTo(0, document.body.scrollHeight);
           });
