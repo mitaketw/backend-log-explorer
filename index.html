@@ -48,6 +48,7 @@
         <input id="ui" autocomplete="off" placeholder="user id (default is all)" />
         <button id="btnSubscribe">Subscribe</button>
         <button id="btnClear">Clear</button>
+        <input type="checkbox" id="chkAutoScroll" />Auto Scroll?
       </div>
       <span class="subscribe"></span>
     </div>
@@ -68,7 +69,9 @@
 
             $('#messages').append(li);
 
-            window.scrollTo(0, document.body.scrollHeight);
+            if($("#chkAutoScroll").is(":checked")){
+              window.scrollTo(0, document.body.scrollHeight);
+            }
           });
 
           $("span.subscribe").text("Subscribe <" + host + "," + ui + ">");
