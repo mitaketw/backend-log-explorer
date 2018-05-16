@@ -26,6 +26,10 @@ do
   SQL=$(echo $SQL | sed "s/:${VAR_INPUT_KEY[$k]}/$VALUE/g")
 done
 
+TMP=($(echo $OUTPUT | jq -r -c '.[] | .X + .Y'))
+XAXIS=${TMP[0]}
+YAXIS=${TMP[1]}
+
 echo $TITLE
 echo $DESCRIPTION
 echo $SQL
@@ -34,5 +38,5 @@ echo $OUTPUT
 
 impala-shell --print_header -B -o /dev/stdout --quiet -q "$SQL" | 
 csvtojson --delimiter='\t' |
-./jsontohighcharts |
+./jsontohighcharts $XAXIS $YAXIS |
 highcharts-export-server --infile /dev/stdin --outfile test.png
