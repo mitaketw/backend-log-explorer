@@ -1,16 +1,23 @@
-#!/bin/sh
+#!/bin/bash
 
 YAML=$(js-yaml chart.yml)
 
-SQL=$(echo $YAML | jq -r -c '.SQL')
-TITLE=$(echo $YAML | jq -r -c '.TITLE')
-DESCRIPTION=$(echo $YAML | jq -r -c '.DESCRIPTION')
-INPUT=$(echo $YAML | jq -r -c '.INPUT[]')
+KEY=($(echo $YAML | jq -r -c 'to_entries | .[].key'))
 
-echo $DESCRIPTION
+IFS="|" read -r -a VALUE <<< "$(echo $YAML | jq -r -c '[to_entries | .[].value | tostring] | join("|")')"
+
+for I in "${!KEY[@]}"
+do
+  CMD=${KEY[$I]}'=''${VALUE[$I]}'''
+
+  eval $CMD
+done
+
 echo $TITLE
+echo $DESCRIPTION
 echo $SQL
 echo $INPUT
+echo $OUTPUT
 
 #impala-shell --print_header -B -o /dev/stdout --quiet -f /dev/stdin | 
 #csvtojson --delimiter='\t' |
