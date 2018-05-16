@@ -32,7 +32,7 @@ echo $SQL
 echo $INPUT
 echo $OUTPUT
 
-impala-shell --print_header -B -o /dev/stdout --quiet -q $SQL | 
+impala-shell --print_header -B -o /dev/stdout --quiet -q "$SQL" | 
 csvtojson --delimiter='\t' |
 ./jsontohighcharts |
 highcharts-export-server --infile /dev/stdin --outfile test.png
