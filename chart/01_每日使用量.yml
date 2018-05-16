@@ -1,4 +1,4 @@
-TITLE: 每月使用量
+TITLE: 每日使用量
 DESCRIPTION: Hello World
 SQL: SELECT to_date(t) as d, count(DISTINCT ui) AS cnt FROM papaqmilog WHERE to_date(t) BETWEEN ":DATE_START" AND ":DATE_END" GROUP BY d ORDER BY d ASC, cnt DESC;
 INPUT:
