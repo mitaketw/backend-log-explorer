@@ -19,6 +19,8 @@ $(function(){
   });
 
   $("#btnGenerate").on("click", function(){
+    $("#loading").show();
+
     $.post("/charts/generate?" + $("form").serialize(), function(data){
       window.location.reload(true);
     });
