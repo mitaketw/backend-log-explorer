@@ -69,7 +69,7 @@ app.post('/charts/generate', function(req, res){
   }, function(err, stdout, stderr){
     console.log(stdout);
 
-    res.send(stdout);
+    return res.end();
   });
 });
 

@@ -20,7 +20,7 @@ $(function(){
 
   $("#btnGenerate").on("click", function(){
     $.post("/charts/generate?" + $("form").serialize(), function(data){
-      console.log(data);
+      window.location.reload(true);
     });
   });
 });
