@@ -40,7 +40,7 @@ app.get('/charts', function(req, res){
   var files = glob.sync(__dirname + "/public/generated/*.png");
 
   var pngFiles = files.map(function(file){
-    return "/public/generated/" + path.basename(file);
+    return "/generated/" + path.basename(file);
   });
 
   res.render("chart.pug", {
