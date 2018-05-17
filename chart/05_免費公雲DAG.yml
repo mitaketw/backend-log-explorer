@@ -1,0 +1,13 @@
+DESCRIPTION: Hello World
+SQL: SELECT to_date(t) AS d, count(DISTINCT gi) AS cnt FROM papaqmilog WHERE gi != "NA" AND gi NOT IN (SELECT gi FROM uigipaid) AND to_date(t) BETWEEN ":DATE_START" AND ":DATE_END" GROUP BY d ORDER BY d ASC
+CHART: column
+INPUT:
+  - DATE_START
+  - DATE_END
+OUTPUT:
+  X:
+    COLUMN: d
+    TEXT: 日期
+  Y:
+    COLUMN: cnt
+    TEXT: 團體數

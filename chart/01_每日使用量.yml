@@ -1,5 +1,6 @@
 DESCRIPTION: Hello World
 SQL: SELECT to_date(t) as d, count(DISTINCT ui) AS cnt FROM papaqmilog WHERE to_date(t) BETWEEN ":DATE_START" AND ":DATE_END" GROUP BY d ORDER BY d ASC, cnt DESC;
+CHART: column
 INPUT:
   - DATE_START
   - DATE_END
