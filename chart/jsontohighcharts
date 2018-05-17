@@ -13,6 +13,9 @@ process.stdin.pipe(concat(function (body) {
     title: {
       text: args[0]
     },
+    subtitle: {
+      text: args[1]
+    },
     xAxis: {
       categories: []
     },
@@ -27,8 +30,8 @@ process.stdin.pipe(concat(function (body) {
   };
 
   for (var e in json) {
-    options.xAxis.categories.push(json[e][args[1]]);
-    options.series[0].data.push(+json[e][args[2]]);
+    options.xAxis.categories.push(json[e][args[2]]);
+    options.series[0].data.push(+json[e][args[3]]);
   }
 
   console.log(JSON.stringify(options));

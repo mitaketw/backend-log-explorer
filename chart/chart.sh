@@ -21,6 +21,8 @@ do
   
   eval $CMD
 
+  SUBTITLE="$SUBTITLE ${INPUT_KEY[$k]}=$VALUE"
+
   SQL=$(echo $SQL | sed "s/:${INPUT_KEY[$k]}/$VALUE/g")
 done
 
@@ -29,6 +31,7 @@ XAXIS=${TMP[0]}
 YAXIS=${TMP[1]}
 
 echo $TITLE
+echo $SUBTITLE
 echo $DESCRIPTION
 echo $SQL
 echo $INPUT
@@ -36,5 +39,5 @@ echo $OUTPUT
 
 impala-shell --print_header -B -o /dev/stdout --quiet -q "$SQL" | 
 csvtojson --delimiter='\t' |
-./jsontohighcharts $TITLE $XAXIS $YAXIS |
+./jsontohighcharts $TITLE $SUBTITLE $XAXIS $YAXIS |
 highcharts-export-server --infile /dev/stdin --outfile ../public/generated/$TITLE.png
