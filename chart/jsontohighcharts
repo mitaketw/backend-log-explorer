@@ -21,10 +21,11 @@ process.stdin.pipe(concat(function (body) {
     },
     yAxis: {
       title: {
-        text: "Persons"
+        text: args[5]
       }
     },
     series: [{
+      name: args[4],
       data: []
     }]
   };

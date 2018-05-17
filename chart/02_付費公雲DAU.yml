@@ -4,5 +4,9 @@ INPUT:
   - DATE_START
   - DATE_END
 OUTPUT:
-  - X: d
-  - Y: cnt
+  X:
+    COLUMN: d
+    TEXT: 日期
+  Y:
+    COLUMN: cnt
+    TEXT: 人數
