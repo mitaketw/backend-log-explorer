@@ -53,8 +53,7 @@ app.post('/charts/generate', function(req, res){
     return req.query[q];
   });
 
-  var args = __dirname + "/chart/" + args.join(" ");
-  var cmd = __dirname + "/chart/chart.sh " + args;
+  var cmd = __dirname + "/chart/chart.sh " + __dirname + "/chart/" + args.join(" ");
 
   console.log("cmd: " + cmd);
 
