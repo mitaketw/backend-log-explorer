@@ -19,6 +19,12 @@ $(function(){
   });
 
   $("#btnGenerate").on("click", function(){
+    if ($("select").prop("selectedIndex") === 0) {
+      alert("Please select a chart");
+
+      return false;
+    }
+
     var valid = true;
 
     $("#inputs > input").each(function(i, e){
