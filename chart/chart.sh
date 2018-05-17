@@ -2,6 +2,9 @@
 
 YAML=$(js-yaml $1)
 
+FILENAME=$(basename -- $1)
+FILENAME="${FILENAME%.*}"
+
 KEY=($(echo $YAML | jq -r -c 'to_entries | .[].key'))
 
 IFS="|" read -r -a VALUE <<< "$(echo $YAML | jq -r -c '[to_entries | .[].value | tostring] | join("|")')"
@@ -30,7 +33,7 @@ TMP=($(echo $OUTPUT | jq -r -c '.[] | .X + .Y'))
 XAXIS=${TMP[0]}
 YAXIS=${TMP[1]}
 
-echo $TITLE
+echo $FILENAME
 echo $SUBTITLE
 echo $DESCRIPTION
 echo $SQL
@@ -39,5 +42,5 @@ echo $OUTPUT
 
 impala-shell --print_header -B -o /dev/stdout --quiet -q "$SQL" | 
 csvtojson --delimiter='\t' |
-./jsontohighcharts "$TITLE" "$SUBTITLE" $XAXIS $YAXIS |
-highcharts-export-server --infile /dev/stdin --outfile ../public/generated/$TITLE.png
+./jsontohighcharts "$FILENAME" "$SUBTITLE" $XAXIS $YAXIS |
+highcharts-export-server --infile /dev/stdin --outfile ../public/generated/$FILENAME/$SUBTITLE.png

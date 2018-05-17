@@ -1,4 +1,3 @@
-TITLE: 付費公雲DAU
 DESCRIPTION: Hello World
 SQL: SELECT to_date(t) as d, count(DISTINCT ui) AS cnt FROM papaqmilog WHERE api != "GET http://ap.qmi.emome.net:80/apiv1/sys/polling" AND gi IN (SELECT gi FROM uigipaid) AND to_date(t) BETWEEN ":DATE_START" AND ":DATE_END" GROUP BY d ORDER BY d ASC, cnt DESC
 INPUT:
