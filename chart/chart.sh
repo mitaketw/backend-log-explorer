@@ -31,14 +31,33 @@ done
 
 SUBTITLE=${SUBTITLE:1:${#SUBTITLE}}
 
-TMP=$(echo $OUTPUT | jq -r -c 'to_entries[]')
-AXIS_COLUMN=($(echo $TMP | jq -r -c '.value.COLUMN'))
-AXIS_TEXT=($(echo $TMP | jq -r -c '.value.TEXT'))
+case $CHART in
+  "column")
+    TMP=$(echo $OUTPUT | jq -r -c 'to_entries[]')
+    AXIS_COLUMN=($(echo $TMP | jq -r -c '.value.COLUMN'))
+    AXIS_TEXT=($(echo $TMP | jq -r -c '.value.TEXT'))
 
-XCOLUMN=${AXIS_COLUMN[0]}
-YCOLUMN=${AXIS_COLUMN[1]}
-XTEXT=${AXIS_TEXT[0]}
-YTEXT=${AXIS_TEXT[1]}
+    XCOLUMN=${AXIS_COLUMN[0]}
+    YCOLUMN=${AXIS_COLUMN[1]}
+    XTEXT=${AXIS_TEXT[0]}
+    YTEXT=${AXIS_TEXT[1]}
+
+    impala-shell --print_header -B -o /dev/stdout --quiet -q "$SQL" | 
+    csvtojson --delimiter='\t' |
+    ./jsontohighcharts "$FILENAME" "$SUBTITLE" "$XTEXT" "$YTEXT" $CHART $XCOLUMN $YCOLUMN |
+    highcharts-export-server --infile /dev/stdin --outfile ../public/generated/$FILENAME/$SUBTITLE.png
+    ;;
+  "pie")
+    TMP=($(echo $OUTPUT | jq -r -c '.NAME, .VALUE'))
+    OUTPUT_NAME=${TMP[0]}
+    OUTPUT_VALUE=${TMP[1]}
+
+    impala-shell --print_header -B -o /dev/stdout --quiet -q "$SQL" | 
+    csvtojson --delimiter='\t' |
+    ./jsontohighcharts "$FILENAME" "$SUBTITLE" "$XTEXT" "$YTEXT" $CHART $OUTPUT_NAME $OUTPUT_VALUE |
+    highcharts-export-server --infile /dev/stdin --outfile ../public/generated/$FILENAME/$SUBTITLE.png
+    ;;
+esac
 
 echo $FILENAME
 echo $SUBTITLE
@@ -46,8 +65,3 @@ echo $DESCRIPTION
 echo $SQL
 echo $INPUT
 echo $OUTPUT
-
-impala-shell --print_header -B -o /dev/stdout --quiet -q "$SQL" | 
-csvtojson --delimiter='\t' |
-./jsontohighcharts "$FILENAME" "$SUBTITLE" $XCOLUMN $YCOLUMN "$XTEXT" "$YTEXT" |
-highcharts-export-server --infile /dev/stdin --outfile ../public/generated/$FILENAME/$SUBTITLE.png

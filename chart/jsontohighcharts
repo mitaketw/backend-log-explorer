@@ -8,31 +8,54 @@ process.stdin.pipe(concat(function (body) {
 
   var options = {
     chart: {
-      type: "column"
+      type: args[4]
     },
     title: {
       text: args[0]
     },
     subtitle: {
       text: args[1]
-    },
-    xAxis: {
-      categories: []
-    },
-    yAxis: {
-      title: {
-        text: args[5]
-      }
-    },
-    series: [{
-      name: args[4],
-      data: []
-    }]
+    }
   };
 
-  for (var e in json) {
-    options.xAxis.categories.push(json[e][args[2]]);
-    options.series[0].data.push(+json[e][args[3]]);
+  switch(options.chart){
+    case "column":
+      options = Object.assign({
+        xAxis: {
+          categories: []
+        },
+        yAxis: {
+          title: {
+            text: args[3]
+          }
+        },
+        series: [{
+          name: args[2],
+          data: []
+        }]
+      }, options);
+
+      for (var e in json) {
+        options.xAxis.categories.push(json[e][args[5]]);
+        options.series[0].data.push(+json[e][args[6]]);
+      }
+
+      break;
+    case "pie":
+      options = Object.assign({
+        series: [{
+          data: []
+        }]
+      }, options);
+
+      for (var e in json) {
+        options.series[0].data.push({
+          name: json[e][args[5]],
+          y: +json[e][args[6]]
+        });
+      }
+
+      break;
   }
 
   console.log(JSON.stringify(options));
