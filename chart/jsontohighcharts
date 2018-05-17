@@ -18,7 +18,7 @@ process.stdin.pipe(concat(function (body) {
     }
   };
 
-  switch(options.chart){
+  switch(options.chart.type){
     case "column":
       options = Object.assign({
         xAxis: {
