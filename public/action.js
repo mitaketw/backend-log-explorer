@@ -19,13 +19,19 @@ $(function(){
   });
 
   $("#btnGenerate").on("click", function(){
+    var valid = true;
+
     $("#inputs > input").each(function(i, e){
       if(!$(e).val()){
-        alert("Please input some value");
-
-        return false;
+        valid = false;
       }
     });
+
+    if (!valid) {
+      alert("Please input some value");
+
+      return false;
+    }
 
     $("#loading").show();
 
