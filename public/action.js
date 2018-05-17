@@ -19,6 +19,14 @@ $(function(){
   });
 
   $("#btnGenerate").on("click", function(){
+    $("#inputs > input").each(function(i, e){
+      if(!$(e).val()){
+        alert("Please input some value");
+
+        return false;
+      }
+    });
+
     $("#loading").show();
 
     $.post("/charts/generate?" + $("form").serialize(), function(data){
