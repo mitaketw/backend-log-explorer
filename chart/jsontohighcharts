@@ -11,7 +11,7 @@ process.stdin.pipe(concat(function (body) {
       type: "column"
     },
     title: {
-      text: "2018-1"
+      text: args[0]
     },
     xAxis: {
       categories: []
@@ -27,8 +27,8 @@ process.stdin.pipe(concat(function (body) {
   };
 
   for (var e in json) {
-    options.xAxis.categories.push(json[e][args[0]]);
-    options.series[0].data.push(+json[e][args[1]]);
+    options.xAxis.categories.push(json[e][args[1]]);
+    options.series[0].data.push(+json[e][args[2]]);
   }
 
   console.log(JSON.stringify(options));
