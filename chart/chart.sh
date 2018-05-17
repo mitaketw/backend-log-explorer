@@ -29,6 +29,8 @@ do
   SQL=$(echo $SQL | sed "s/:${INPUT_KEY[$k]}/$VALUE/g")
 done
 
+SUBTITLE=${SUBTITLE:1:${#SUBTITLE}}
+
 TMP=($(echo $OUTPUT | jq -r -c '.[] | .X + .Y'))
 XAXIS=${TMP[0]}
 YAXIS=${TMP[1]}
