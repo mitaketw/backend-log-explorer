@@ -33,12 +33,19 @@ app.post('/log', function(req, res){
 app.get('/charts', function(req, res){
   var files = glob.sync(__dirname + "/chart/*.yml");
 
-  var filenames = files.map(function(file){
+  var ymlFiles = files.map(function(file){
+    return path.basename(file);
+  });
+
+  var files = glob.sync(__dirname + "/public/generated/*.png");
+
+  var pngFiles = files.map(function(file){
     return path.basename(file);
   });
 
   res.render("chart.pug", {
-    filenames: filenames
+    ymlFiles: ymlFiles,
+    pngFiles: pngFiles
   });
 });
 

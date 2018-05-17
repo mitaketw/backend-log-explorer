@@ -14,10 +14,14 @@ html
           form
             .form-group
               select.form-control(name="optFile")
-                each filename in filenames
-                  option(value=filename)= filename
+                each file in ymlFiles
+                  option(value=file)= file
             #yaml.form-group
               textarea.form-control
             #inputs.form-group
             .form-group
               input(type="button", id="btnGenerate", value="generate image")
+      .row
+        each file in pngFiles
+          .col
+            img(src=file, class="img-thumbnail")
