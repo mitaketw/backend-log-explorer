@@ -2,8 +2,8 @@ DESCRIPTION: Hello World
 SQL: SELECT to_date(t) AS d, count(DISTINCT gi) AS cnt FROM papaqmilog WHERE gi != "NA" AND gi IN (SELECT gi FROM uigipaid) AND to_date(t) BETWEEN ":DATE_START" AND ":DATE_END" GROUP BY d ORDER BY d ASC
 CHART: column
 INPUT:
-  - DATE_START
-  - DATE_END
+  - DATE_START: date
+  - DATE_END: date
 OUTPUT:
   X:
     COLUMN: d

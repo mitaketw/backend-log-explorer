@@ -2,8 +2,8 @@ DESCRIPTION: Hello World
 SQL: SELECT substr(li, 1, 2) AS lang, count(li) AS cnt FROM papaqmilog WHERE li != "NA" AND to_date(t) BETWEEN ":DATE_START" AND ":DATE_END" GROUP BY substr(li, 1, 2) ORDER BY cnt DESC
 CHART: pie
 INPUT:
-  - DATE_START
-  - DATE_END
+  - DATE_START: date
+  - DATE_END: date
 OUTPUT:
   NAME: lang
   VALUE: cnt

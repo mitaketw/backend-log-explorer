@@ -8,11 +8,16 @@ $(function(){
       $("#inputs").empty();
 
       inputs.forEach(function(input){
+        var name = Object.keys(input)[0];
+        var type = Object.keys(input).map(function(q){
+          return input[q];
+        })[0];
+
         $("<input>").attr({
-          type: "text",
+          type: type,
           class: "form-control",
-          name: input,
-          placeholder: input
+          name: name,
+          placeholder: name
         }).appendTo($("#inputs"));
       });
     });
