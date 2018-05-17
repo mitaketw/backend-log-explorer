@@ -39,5 +39,5 @@ echo $OUTPUT
 
 impala-shell --print_header -B -o /dev/stdout --quiet -q "$SQL" | 
 csvtojson --delimiter='\t' |
-./jsontohighcharts $TITLE $SUBTITLE $XAXIS $YAXIS |
+./jsontohighcharts "$TITLE" "$SUBTITLE" $XAXIS $YAXIS |
 highcharts-export-server --infile /dev/stdin --outfile ../public/generated/$TITLE.png
