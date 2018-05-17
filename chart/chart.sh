@@ -16,7 +16,7 @@ do
   eval $CMD
 done
 
-INPUT_KEY=($(echo $INPUT | jq -r -c '.[]'))
+INPUT_KEY=($(echo $INPUT | jq -r -c '.[] | to_entries[] | .key'))
 
 for k in "${!INPUT_KEY[@]}"
 do
