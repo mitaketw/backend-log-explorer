@@ -54,8 +54,11 @@ app.post('/charts/generate', function(req, res){
   });
 
   var args = __dirname + "/chart/" + args.join(" ");
+  var cmd = __dirname + "/chart/chart.sh " + args;
 
-  child_process.exec(__dirname + "/chart/chart.sh " + args, function(err, stdout, stderr){
+  console.log("cmd: " + cmd);
+
+  child_process.exec(cmd, function(err, stdout, stderr){
     console.log(stdout);
 
     res.send(stdout);
