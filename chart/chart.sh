@@ -44,7 +44,7 @@ case $CHART in
 
     impala-shell --print_header -B -o /dev/stdout --quiet -q "$SQL" | 
     csvtojson --delimiter='\t' |
-    ./jsontohighcharts "$FILENAME" "$SUBTITLE" "$XTEXT" "$YTEXT" $CHART $XCOLUMN $YCOLUMN #|
+    ./jsontohighcharts "$FILENAME" "$SUBTITLE" "$XTEXT" "$YTEXT" $CHART $XCOLUMN $YCOLUMN |
     highcharts-export-server --infile /dev/stdin --outfile ../public/generated/$FILENAME/$SUBTITLE.png
     ;;
   "pie")
