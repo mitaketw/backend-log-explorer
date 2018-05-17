@@ -24,7 +24,7 @@ do
   
   eval $CMD
 
-  SUBTITLE="$SUBTITLE ${INPUT_KEY[$k]}=$VALUE"
+  SUBTITLE="$SUBTITLE,${INPUT_KEY[$k]}=$VALUE"
 
   SQL=$(echo $SQL | sed "s/:${INPUT_KEY[$k]}/$VALUE/g")
 done

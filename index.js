@@ -37,10 +37,13 @@ app.get('/charts', function(req, res){
     return path.basename(file);
   });
 
-  var files = glob.sync(__dirname + "/public/generated/*.png");
+  var files = glob.sync(__dirname + "/public/generated/**/*.png");
 
   var pngFiles = files.map(function(file){
-    return "/generated/" + path.basename(file);
+    var dirs = path.dirname(file).split("/");
+    var dir = dirs[dirs.length - 1];
+
+    return "/generated/" + dir + "/" + path.basename(file);
   });
 
   res.render("chart.pug", {
