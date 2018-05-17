@@ -14,6 +14,7 @@ html
           form
             .form-group
               select.form-control(name="optFile")
+                option 請選擇...
                 each file in ymlFiles
                   option(value=file)= file
             #yaml.form-group
