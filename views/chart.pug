@@ -28,7 +28,7 @@ html
           .col-6
             a(href=file, target="_blank")
               - var parts = file.split("/");
-              - var id = parts[2].split("_")[0] + "@" + parts[3];
+              - var id = parts[2].split("_")[0] + "@" + parts[3].split(".")[0];
               - var b64 = Buffer.from(id).toString("base64");
               - var bid = b64.substring(0, b64.length - 1);
               img(src=file, id=bid, class="img-thumbnail")
