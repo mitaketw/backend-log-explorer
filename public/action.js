@@ -44,13 +44,14 @@ $(function(){
       return false;
     }
 
-    var selectedYaml = $("select").val().split("_")[0];
+    var selectedYaml = $("select").val();
+    var selectedNo = selectedYaml.split("_")[0];
     var serializeData = $("form").serialize();
     var queryStr = new URLSearchParams(serializeData);
 
     queryStr.delete("optFile");
 
-    var b64 = btoa(selectedYaml + "@" + queryStr.toString());
+    var b64 = btoa(selectedNo + "@" + queryStr.toString());
     var bid = b64.substring(0, b64.length - 1);
 
     if ($("#" + bid).length) {
