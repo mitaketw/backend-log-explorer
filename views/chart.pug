@@ -27,4 +27,4 @@ html
         each file in pngFiles
           .col-6
             a(href=file, target="_blank")
-              img(src=file, class="img-thumbnail")
+              img(src=file, id=#{file.toUpperCase()}, class="img-thumbnail")
