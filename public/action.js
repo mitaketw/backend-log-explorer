@@ -45,17 +45,20 @@ $(function(){
     }
 
     var selectedYaml = $("select").val().split(".")[0];
-    var queryStr = $("form").serialize();
+    var serializeData = $("form").serialize();
+    var queryStr = new URLSearchParams(serializeData);
 
-    if ($("#" + selectedYaml + "@" + queryStr).length === 0) {
-      alert(selectedYaml + ", " + queryStr + " exists");
+    queryStr.delete("optFile");
+
+    if ($("#" + selectedYaml + "@" + queryStr.toString()).length === 0) {
+      alert(selectedYaml + ", " + queryStr.toString() + " exists");
 
       return false;
     }
 
     $("#loading").show();
 
-    $.post("/charts/generate?" + queryStr, function(data){
+    $.post("/charts/generate?" + serializeData, function(data){
       window.location.reload(true);
     });
   });
