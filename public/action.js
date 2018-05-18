@@ -44,9 +44,18 @@ $(function(){
       return false;
     }
 
+    var selectedYaml = $("select").val().split(".")[0];
+    var queryStr = $("form").serialize();
+
+    if ($("#" + selectedYaml + "@" + queryStr).length === 0) {
+      alert(selectedYaml + ", " + queryStr + " exists");
+
+      return false;
+    }
+
     $("#loading").show();
 
-    $.post("/charts/generate?" + $("form").serialize(), function(data){
+    $.post("/charts/generate?" + queryStr, function(data){
       window.location.reload(true);
     });
   });
