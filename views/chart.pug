@@ -27,4 +27,6 @@ html
         each file in pngFiles
           .col-6
             a(href=file, target="_blank")
-              img(src=file, id=#{file.toUpperCase()}, class="img-thumbnail")
+              - var parts = file.split("/");
+              - var id = parts[2] + "@" + parts[3];
+              img(src=file, id=id, class="img-thumbnail")
