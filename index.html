@@ -46,8 +46,8 @@
       <div>
         <input id="host" autocomplete="off" placeholder="hostname" />
         <input id="ui" autocomplete="off" placeholder="user id (default is all)" />
-        <button id="btnSubscribe">Subscribe</button>
-        <button id="btnClear">Clear</button>
+        <input type="button" id="btnSubscribe" value="Subscribe" />
+        <input type="button" id="btnClear" value="Clear /">
         <input type="checkbox" id="chkAutoScroll" />Auto Scroll?
       </div>
       <span class="subscribe"></span>
@@ -57,34 +57,36 @@
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
       $(function () {
+        subscribe();
+
         $("#btnSubscribe").on("click", function(){
-          var host = $("#host").val().toLowerCase();
-          var ui = ($("#ui").val() || "all").toLowerCase();
-          var socket = io();
-
-          socket.removeAllListeners();
-
-          socket.on(host + "," + ui, function(msg){
-            var li = $('<li>').text(msg);
-
-            $('#messages').append(li);
-
-            if($("#chkAutoScroll").is(":checked")){
-              window.scrollTo(0, document.body.scrollHeight);
-            }
-          });
-
-          $("span.subscribe").text("Subscribe <" + host + "," + ui + ">");
-
-          return false;
+          subscribe();
         });
 
         $("#btnClear").on("click", function(){
           $("#messages").empty();
-
-          return false;
         });
       });
+
+      function subscribe(){
+        var host = ($("#host").val() || "qmi17").toLowerCase();
+        var ui = ($("#ui").val() || "all").toLowerCase();
+        var socket = io();
+
+        socket.removeAllListeners();
+
+        socket.on(host + "," + ui, function(msg){
+          var li = $('<li>').text(msg);
+
+          $('#messages').append(li);
+
+          if($("#chkAutoScroll").is(":checked")){
+            window.scrollTo(0, document.body.scrollHeight);
+          }
+        });
+
+        $("span.subscribe").text("Subscribe <" + host + "," + ui + ">");
+      }
     </script>
   </body>
 </html>
