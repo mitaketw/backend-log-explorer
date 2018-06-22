@@ -56,6 +56,8 @@
     <script src="/socket.io/socket.io.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
     <script>
+      var socket = io();
+
       $(function () {
         subscribe();
 
@@ -71,7 +73,6 @@
       function subscribe(){
         var host = ($("#host").val() || "qmi17").toLowerCase();
         var ui = ($("#ui").val() || "all").toLowerCase();
-        var socket = io();
 
         socket.removeAllListeners();
 
